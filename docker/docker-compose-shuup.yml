@@ -1,0 +1,34 @@
+version: '2.1'
+
+services:
+  mysql-shuup:
+    container_name: mysql-shuup
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: qwerty
+    networks:
+      shuup:
+        aliases:
+          - mysql
+          - db
+    volumes:
+      - mysql-shuup-datavolume:/var/lib/mysql
+  shuup:
+    container_name: shuup
+    image: shuup
+    build:
+      context: ./shuup
+    restart: unless-stopped
+    networks:
+      shuup:
+        aliases:
+          - web
+    ports:
+      - "8080:80"
+
+volumes:
+  mysql-shuup-datavolume:
+
+networks:
+  shuup:

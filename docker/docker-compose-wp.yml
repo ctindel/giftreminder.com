@@ -1,0 +1,32 @@
+version: '2.1'
+
+services:
+  wpmysql:
+    container_name: wpmysql
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: qwerty
+    networks:
+      wp:
+        aliases:
+          - mysql
+    volumes:
+      - wp-datavolume:/var/lib/mysql
+  wp:
+    container_name: wp
+    image: wordpress:4.9.8-php7.2
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_PASSWORD: qwerty
+    networks:
+      wp:
+    ports:
+      - "8080:80"
+
+
+volumes:
+  wp-datavolume:
+
+networks:
+  wp:
