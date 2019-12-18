@@ -6,7 +6,10 @@ services:
     image: mysql:5.7
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: qwerty
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_DATABASE: giftreminder
+      MYSQL_USER: giftreminder
+      MYSQL_PASSWORD: changeme
     networks:
       shuup:
         aliases:
